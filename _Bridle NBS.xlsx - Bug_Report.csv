@@ -1,0 +1,257 @@
+  S/n,Bug_ID,Bug title,Bug Description,Step to reproduce,Actual Result,Expected Result,Status,Severity,Screenshots
+1,BD_001,Extra Fields on Create Account Page Not in Figma Design,"The ""Create Account"" page on the website includes several form elements that are not present in the approved Figma design. These extra fields create a mismatch between the implemented UI and the design specification. The additional elements include role selection (contestant or producer), age confirmation (""Are you 18 or older?""), a guardian confirmation prompt, and a password field—all of which are missing from the Figma mockup.","1. Open the website
+2. Click on ""Create Account"" button
+2. Open the corresponding Figma design
+3. Compare all fields and elements side-by-side","The website includes additional fields and options that are not present in the Figma design.
+     Unexpected Fields Identified:
+1. Select option to create account as contestant or producer
+2. “Are you 18 or older?” selection (Yes/No)
+3. Confirmation question – “Are you creating this account as the parent/legal guardian for a contestant(s) under the age of 18?”
+4. Password Field (not shown in the Figma mockup)","The ""Create Account"" page on the website should match the Figma design exactly in layout, fields, and text content.",Open,Medium,
+,BD_002,Homepage Not Accessible After Incomplete Registration — URL Loads Last Registration Step,"When a user starts the registration process but exits before completion, re-entering the main website URL in the browser does not load the home page. Instead, it resumes from the last incomplete registration step, which may confuse users who intend to start over or access general information.","1. Start the registration process on the website.
+2. Exit the process midway (e.g., by closing the tab or browser).
+3. Reopen the browser and manually enter the website’s base URL.
+4. Observe the page that loads.","- System automatically resumes the registration process from where the user left off.
+- User is not directed to the home page, even when explicitly entering the base URL.","- User should be redirected to the home page when entering the base URL.
+- Any incomplete registration session should not automatically resume without user intent.",Open,Low,
+2,BD_003,First Name and Last Name Fields Accept Numeric and Special Character Inputs Without Validation,"The system allows users to register using numeric characters (e.g., ""123456"") and special characters (e.g., ""@#%&"") in the First Name and Last Name fields. This violates basic input validation standards for name fields, which are expected to accept only alphabetical characters.","1. Open the website
+2. Click on the create account button.
+2. In the ""First Name"" field, enter: 1234567890
+3. In the ""Last Name"" field, enter: @#%&
+4. Click on ""Continue"" button.
+
+",The user is able to register successfully with numeric and special characters in both the First Name and Last Name fields. No validation error is shown.,The system should trigger an error message such as “Only letters are allowed” and prevent form submission when numeric or special characters are entered in the name fields.,Open,Medium,
+3,BD_004,System Allows Registration with Single-Letter in First and Last Names,"The registration form permits users to register using only a single character in both the First Name and Last Name fields (e.g., ""A"" and ""B""). This violates typical form validation standards that require a minimum of 2 characters for name fields. Allowing single-letter names can result in poor data quality and may affect downstream systems relying on user details.","1. Open the website
+2. Click on the create account button.
+2. In the ""First Name"" field, enter: A
+3. In the ""Last Name"" field, enter: B
+4. Complete the remaining fields and Click on ""Continue"" button.
+
+",The system accepts the form and successfully registers the user with single-letter names.,The system should display a validation error such as “First and Last names must be at least 2 characters long” and prevent registration.,Open,Low,
+4,BD_005,Email Field Does Not Display Validation Error for Invalid Format,"When a user enters an email address with an invalid format (e.g., ""test@com"") in the email field during registration, the system does not provide a specific validation message indicating the format issue. Instead, it returns a generic error message: “Failed to create user.” This is misleading and does not guide the user to correct their input, leading to a poor user experience and potential form abandonment","1. Navigate to the user registration page.
+2. In the Email field, enter an invalid format like test@com
+3. Fill out the remaining required fields with valid data.
+4. Click on the ""Continue"" button","The system fails to validate the email format. Instead of a helpful validation message, it returns a generic error: ""Failed to create user.""",The system should show a validation error such as “Please enter a valid email address” and block form submission.,Open,Medium,
+5,BD_006,Password Field Does Not Enforce Minimum and Maximum Length Requirements,"The password input field on the ""Create Account"" page fails to enforce both the minimum and maximum length requirements. Users are able to enter passwords that are shorter than the expected minimum (e.g., ""Ab1"", ""1"", ""a"") without receiving any validation message. This weakens password security standards and can lead to poor user account protection.","1. Navigate to the user registration page.
+2. In the password field, enter a short password like ""Ab1"", ""1"", ""a""
+3. Fill out the remaining required fields with valid data.
+4. Click on the ""Continue"" button",No validation message is displayed. The form accepts short passwords and allows account creation with invalid-length passwords.,"The system should display a validation error such as ""Password must be at least 8 characters"" or ""Password must be between 8 and 20 characters"", and prevent form submission.",Open,High,
+6,BD_007,"Password Field Accepts Weak Passwords with Only Alphabets, Numbers, or Special Characters","The password field accepts passwords that consist only of alphabets (e.g., ""abcdef""), only numbers (e.g., ""12345678""), or only special characters (e.g., ""@#$%^&*""). There is no validation to enforce a strong password policy requiring a combination of uppercase and lowercase letters, numbers, and special characters. This significantly reduces password strength and compromises user account security.","1. Navigate to the ""Create Account"" page.
+2. In the password field, enter one of the following:
+    - abcdef (only alphabets)
+   - 12345678 (only numbers)
+   - @#$%^&* (only special characters)
+3. Complete the remaining required fields with valid data.
+4. Click on the ""Continue"" button.
+
+","The form accepts passwords that are composed solely of alphabets, numbers, or special characters without any validation or warning.","The system should display a validation error such as:
+""Password must include a mix of letters, numbers, and special characters.""
+Form submission should be blocked until a strong password is provided.",Open,High,
+7,BD_008,Password Field Does Not Display Hint or Guidelines for Password Requirements,"When a user focuses on or hovers over the password input field on the ""Create Account"" page, no tooltip, placeholder, or helper text is shown to guide users on the required password format. This can cause users to create weak passwords or face repeated form submission failures without knowing the password rules, resulting in frustration and poor user experience.","1. Navigate to the ""Create Account"" page.
+2. Locate the password field.
+3. Hover over or click (focus) on the field.","No password hint, tooltip, or guideline is displayed. Users are left unaware of the expected password format.","A password guideline should appear (e.g., “Password must be 8–20 characters and include letters, numbers, and special characters”).",Open,Medium,
+8,BD_009,Password Visibility Toggle (Eye Icon) is Missing from Password Field,"The ""Create Account"" page does not include a password visibility toggle (eye icon) next to the password input field. This feature is standard in modern web forms, allowing users to view or hide their typed password for accuracy. Its absence may lead to input errors, especially on mobile devices or when using complex passwords, negatively affecting usability and accessibility.","1. Navigate to the ""Create Account"" page.
+2. Locate the password field.
+3. Look for an eye icon next to the password field.
+",There is no eye icon or visibility toggle available. Users cannot view their password while typing.,"An eye icon should be present. When clicked:
+- It should reveal the password text (change input type to text).
+- Clicking again should mask the password (change input type back to password).
+
+",Open,Low,
+9,BD_010,Phone Number Field Accepts Alphabetic and Special Characters Without Validation,"The phone number field on the ""Create Account"" page fails to enforce proper numeric validation. It currently allows users to input alphabetic characters (e.g., ""abcde"") and special characters (e.g., ""@#%"") without triggering any validation error. This can lead to invalid phone number submissions, disrupting contact functionality and backend data integrity.","1. Navigate to the ""Create Account"" page.
+2. Locate the phone number input field.
+3. Enter alphabetic characters such as abcde.
+4. Alternatively, enter special characters like @#%.
+5. Click on the ""Continue"" button",The system accepts the form with alphabetic and special characters in the phone number field without any validation feedback.,"The system should:
+- Display a validation error (e.g., “Phone number must contain only numbers”).
+- Prevent form submission with non-numeric input.
+",Open,Medium,
+10,BD_011,Phone Number Field Does Not Enforce Maximum Input Length,"The phone number field on the ""Create Account"" page allows users to input strings longer than required (e.g., ""12345678901234567890"") without displaying a validation error or truncating the excess input. This violates typical formatting and length standards for phone numbers and may cause issues with data storage, formatting, and backend systems expecting valid phone number lengths.","1. Navigate to the ""Create Account"" page.
+2. Locate the phone number input field.
+3. Enter a long numeric string like 12345678901234567890.
+4. Click on the ""Continue"" button","The system accepts input of any length in the phone number field without validation or truncation.
+",The field should either truncate input beyond the maximum length or Display a validation error such as “Phone number must not exceed 15 digits.”,Open,Medium,
+11,BD_012,Form Navigation Fails with Intermittent Client-Side Exception Despite Valid Inputs,"When a user fills out all fields on the ""Create Account"" page with valid inputs and attempts to proceed by clicking ""Continue, it displays one of the following error messages:
+- ""Application Error: a client-side exception has occurred""
+- ""Cannot return null for non-nullable field Event.cinchAdditionalFee.""
+""before navigating  the user to the Personal Details page.","1. Navigate to the ""Create Account"" page.
+2. Fill all required fields with valid input (e.g., proper name, email, password, phone number, etc.).
+3. Click the “Continue” button to submit the form.","User is sometimes shown one of the following error messages:
+- ""Application Error: a client-side exception has occurred""
+- ""Cannot return null for non-nullable field Event.cinchAdditionalFee.""","User should be smoothly redirected to the Personal Details page, and account creation should proceed successfully.",Open,High,
+12,BD_013,"""Terms of Service"" and ""Privacy Policy"" Links  Do Not Redirect When Clicked","On the ""Create Account"" page, the ""Terms of Service"" and ""Privacy Policy"" links are either not clickable or do not redirect to the appropriate pages when clicked. These links are critical for legal compliance and user transparency. Their malfunction may prevent users from reviewing important legal information before agreeing, which can lead to trust issues or legal risks.","1. Load the ""Create Account"" page.
+2. Scroll to locate the ""Terms of Service"" and ""Privacy Policy"" links.
+3. Click on each link separately.
+4. Observe the behavior.",Clicking the links does not redirect to any page or trigger any response.,"Each link should:
+- Be clickable
+- Open the appropriate policy page in the same or a new browser tab
+
+",Open,Low,
+13,BD_014,User Does Not Receive Email Notification After Successful Registration,"After completing the registration process with valid input on the ""Create Account"" page, the user does not receive any confirmation or welcome email. This issue affects user onboarding, confirmation tracking, and trust. Email notification is a critical feedback mechanism to assure users that their account was created successfully.","1. Navigate to the ""Create Account"" page.
+2. Fill in all required fields with valid data.
+3. Submit the registration form.
+4. Check the inbox and spam/junk folders of the registered email address.","No email notification is received, even after a successful registration. The issue persists even after checking spam/junk folders.","User should receive an email (e.g., confirmation or welcome message) immediately after successful registration.",Open,Medium,
+15,BD_016,User Can Access Dashboard Without Completing Onboarding Process,"After account creation, users are expected to complete an onboarding process (e.g., personal details, preferences, or verification) before gaining access to the dashboard. However, the system intermittently allows users to bypass this onboarding and land directly on the dashboard or displays the dashboard before navigating to the personal details page. This behavior breaks the intended user flow and may result in incomplete profiles or misconfigured accounts.","1. Register a new account via the ""Create Account"" page.
+2. Observe the redirect after submission.
+3. Repeat the registration in different sessions or devices.
+4. Check if onboarding is enforced every time before dashboard access.","The user is sometimes redirected directly to the dashboard without completing the onboarding steps.
+",User should be strictly required to complete the entire onboarding process before being redirected to the dashboard.,Open,Medium,
+,,PERSONAL DETAILS PAGE,,,,,,,
+16,BD_016,"""Personal Details"" Page Does Not Match Figma Design","The ""Personal Details"" page on the website has several inconsistencies when compared to the approved Figma design. These discrepancies affect both form layout and UI content accuracy.","1. Open the ""Personal Details"" page on the website.
+2. Open the corresponding Figma design for the same page.
+3. Compare all fields, buttons, and labels side by side.","1. First Name and Last Name fields are present on the website but are missing in the Figma design.
+2. The ""Add Address"" button reads “+Address” on the website, while in the Figma it is labeled as “+ Another Address”.
+3. The State field is a dropdown select option in the Figma, but on the website, it appears as a plain input field without selectable options.","The website should exactly match the Figma design in terms of:
+- Field presence and order
+- Button labels and behavior
+- Input options (e.g., dropdowns)
+
+",Open,Medium,
+,BD_017,"User Cannot Navigate to ""Create Account and Home""Page from the Personal details page.","The ""Personal Details"" page lacks basic navigation options to return to the 'Create Account or Home"" Page. Neither a back button nor a clickable logo is provided or functional for navigation. This limits user control and violates common usability patterns where logos typically act as shortcuts to the home page. ","1. Load the ""Personal Details"" page.
+2. Attempt to click the logo
+3. Check for the presence of a “Back” button.
+4. Attempt to navigate to the ""Create Account or Home"" page.","- No back/home button is present.
+- The logo is not clickable and does not redirect the user to the home page.","- The logo should be clickable and redirect to the home page.
+- Alternatively, a clearly labeled back/home button should allow users to navigate away from the ""Personal Details"" page.
+
+
+",Open,Medium,
+17,BD_018,Date of Birth Field Allows Future Dates and Underage Selections,"On the ""Personal Details"" page, the Date of Birth (DOB) field incorrectly allows users to select future dates and dates indicating an age below 18 years. This violates expected age restrictions and introduces invalid data.","1. Navigate to the ""Personal Details"" page containing the DOB field.
+2. Click on the calendar icon to open the date picker.
+3. Attempt to select:
+    - A date in the future
+    - A date indicating the user is younger than 18 years","- User can select future dates.
+- User can enter DOBs that result in ages below 18, with no validation error shown.","- The calendar should prevent selection of future dates.
+- The system should restrict DOB to users aged 18 and above, possibly with an error message for invalid entries.
+
+",Open,High,
+18,BD_019,Mandatory Address Fields Not Enforced — User Can Proceed with Empty Fields,"On the form page, critical address fields such as Address Line 1, City, and Zip Code are not enforced as required. Users are able to continue to the next step of the form even when these fields are left blank. This leads to incomplete user data.","1. Navigate to the form page containing address fields.
+2. Leave Address Line 1, City, and Zip Code empty.
+3. Click the “Continue” button.
+
+","- No validation errors are shown.
+- User is able to proceed to the next page with all address fields left empty.
+- The address fields behave as optional, which is likely unintended.","- The system should display validation errors for each required field.
+- User should not be allowed to proceed until all mandatory address fields are filled.",Open,Medium,
+19,BD_020,ZIP Code Field Accepts Non-Numeric Values Without Validation Error,The ZIP code field on the form page does not validate the input format. Users are able to enter alphabetic characters and special symbols without receiving an error message. This behavior can result in invalid address data .,"1. Navigate to the form page.
+2. In the ZIP code field, enter non-numeric values like abcd or @#%&.
+3. Click the “Continue” button.
+","- The system accepts non-numeric values in the ZIP code field.
+- No validation error is shown, and user can proceed.","- The system should display a validation error indicating that only numeric input is allowed.
+- Submission should be blocked until a valid ZIP code is entered.",Open,Medium,
+20,,BANK DETAILS PAGE,,,,,Open,Low,
+21,BD_021,Banking Details Page Design and Flow Do Not Match Figma; Popup Is Blank,"The Banking Details page on the website does not match the layout, flow, or structure presented in the Figma design. While the Figma shows the banking form as a direct continuation from the Personal Details page, the website implementation introduces a detour where users must click an ""Add Bank Details"" button to trigger a popup. Furthermore, the popup that appears is blank, displaying no input fields or content as expected.","1. Navigate through the form until you reach the Bank Details step.
+2. Observe the flow from the Personal Details page.
+3. Click on the “Add Bank Details” button.
+4. Compare the behavior and layout with the Figma design.","- User is required to click an ""Add Bank Details"" button.
+- This opens a popup/modal, which appears blank, lacking any fields or instructions.
+- The entire flow and design deviate significantly from the Figma.","- The Bank Details form should be a direct next step after the Personal Details page, per Figma.
+- Input fields should be immediately visible and match the Figma layout.
+- No extra clicks or modal popups should be required unless explicitly designed.
+
+",Open,High,
+22,BD_022,"Unable to Enter Banking Details — ""Add Bank Details"" Button Opens Empty Page","When users attempt to enter their banking information by clicking the “Add Bank Details” button, they are redirected to a blank or empty page that contains no fields or forms for entering banking details. This blocks the user from completing a required step in the registration or onboarding process.","1. Navigate to the Banking Details section of the website.
+2. Click the “Add Bank Details” button.
+3. Attempt to fill in the following:
+   - Bank Name
+   - Account Holder Name
+   - Routing Number
+   - Account Number
+   - Confirm Account Number
+4. Click “Continue”.","- Clicking “Add Bank Details” redirects to an empty page or opens a blank popup.
+- No input fields are displayed.","- A form should appear with all the required fields.
+- User should be able to enter valid bank details and proceed to the next step.",Open,Critical,
+23,,EXTRA INFO PAGE,,,,,,,
+24,BD_023,"Missing Field and Incomplete Placeholder Text on ""Extra Info"" Page Compared to Figma","On the ""Extra Info"" page, two key discrepancies were found when compared to the Figma design:
+1. The field “Have you held a WPRA Pro Card?” along with its select dropdown is completely missing from the website.
+2. The placeholder text for the input field “What are your Consistent Catch Times?” is incomplete, displaying only part of the expected guidance. These deviations may hinder data accuracy and user experience.","1. Navigate to the Extra Info page on the website.
+2. Open the corresponding Figma design for this page.
+3. Compare all form elements and placeholder texts.","- The “Have you held a WPRA Pro Card?” field and dropdown are missing from the website.
+- The placeholder for “Consistent Catch Times” is truncated or incomplete, not aligning with the Figma design.","- The field “Have you held a WPRA Pro Card?” with a select dropdown should be present.
+- The placeholder for “What are your Consistent Catch Times?” should display the full guidance text as seen in the Figma.
+
+",Open,Medium,
+25,BD_024,Breakaway Winnings Field Rejects some Valid Decimal Numbers,"The ""Breakaway Winnings"" input field fails to accept valid decimal number entries such as ""100.50"", ""300.00"", and ""500.50"", even though these are standard currency formats. This prevents users from accurately entering their earnings and may result in incorrect or incomplete data submissions.","1. Navigate to the Extra details page containing the ""Breakaway Winnings"" input field.
+2. Click into the field and type a decimal number, e.g., ""100.50"" or ""300.00"".
+3. Attempt to proceed or submit the form.","- The system rejects or blocks decimal values like ""100.50"" and ""500.50"".
+- Users are unable to enter some currency amounts with cents.
+
+","- The field should accept and retain the decimal value entered.
+- No validation error should occur when entering valid currency amounts.",Open,Medium,
+26,BD_025,Breakaway Winnings Field Accepts Invalid Negative Values,"The ""Breakaway Winnings"" input field allows users to enter negative numbers, such as ""-200"", which is not valid for a field intended to capture earnings. This may result in inaccurate financial records and undermine data integrity.","1. Navigate to the form page containing the ""Breakaway Winnings"" field.
+2. Enter a negative value, e.g., -200.
+3. Attempt to proceed or submit the form.","- The field accepts negative numbers without any validation error.
+- Form can be submitted with incorrect negative values.","- The system should reject negative values.
+- A validation message should be shown (e.g., ""Amount cannot be negative."").",Open,Medium,
+27,BD_026,Equine Events Winnings Field Does Not Accept Some Valid Currency Format,"The ""Equine Events Winnings"" input field does not accept valid currency values such as ""500.00"" or ""200.50"", which is the standard format for monetary input. This limitation can prevent users from entering accurate earnings, affecting data reliability and user experience.","1. Go to the form containing the ""Equine Events Winnings"" field.
+2. Enter a value like ""500.00"" or ""250.50"".
+3. Try to proceed or observe how the field handles the input.","- The input field does not accept decimal values like ""500.00"".
+- User is unable to input some precise monetary data.","The field should allow and retain properly formatted currency values (e.g., 500.00).",Open,Medium,
+28,BD_027,Record Time Field Accepts Invalid Format Inputs,"The ""Record Time"" input field allows users to enter invalid formats such as ""75 minutes"", which is not a standardized or acceptable time format. This could lead to inconsistent data entries and misinterpretation of performance times.","1. Navigate to the form section with the ""Record Time"" input field.
+2. Enter an invalid format such as ""75 minutes"" or ""ten seconds"".
+3. Attempt to proceed or observe the input behavior.
+
+","- The field accepts values like ""75 minutes"" without validation.
+- No error or warning is displayed for incorrect formats.","- The field should validate format strictly, accepting only a valid time format (e.g., mm:ss or hh:mm:ss).
+- User should receive an error message for unsupported input formats.
+
+",Open,Medium,
+29,BD_028,Consistent Catch Times Field Accepts Alphabetic Characters,"The ""Consistent Catch Times"" input field accepts alphabetic entries such as ""one minute"", which are not valid time formats. This allows users to submit inconsistent or unreadable data.","1. Go to the form section with the Consistent Catch Times field.
+2. Enter alphabetic text, e.g., ""one minute"" or ""sixty seconds"".
+3. Observe the field’s behavior or try to submit the form.","- The system accepts alphabetic entries with no validation error.
+- User can proceed with invalid input.","- The field should reject alphabetic characters.
+- A validation message should prompt the user to enter a valid time format (e.g., mm:ss).",Open,Medium,
+30,BD_029,Continue Button Remains Enabled and Submits Without Validating Required Fields,"When the user clicks the “Continue” button without filling in any required fields, the system does not display any validation messages, and the user may proceed or receive no feedback. This allows form submission attempts with incomplete or invalid data, which breaks the expected validation flow.","1. Navigate to the page with the Continue button.
+2. Leave all required input fields blank
+3. Click the “Continue” button.","- No validation messages are shown.
+- User remains on the page but is not informed about which fields are required.","- The system should either disable the Continue button or show validation error messages for each required field.
+- User should not proceed until required fields are completed.",Open,Medium,
+31,BD_030,"Spelling and Content Discrepancies on ""Extra Info"" Page","The ""Extra Info"" page contains spelling mistakes and text inconsistencies compared to the Figma design. Specifically:
+- In the “Rate your Roping Talent” section, “geld” is incorrectly used instead of “held”.
+- The button label for exiting the page differs from Figma:
+   - Figma uses “Done”
+   - Website uses “Close”","1. Navigate to the ""Extra Info"" page on the website.
+2. Compare the content with the corresponding Figma design.
+3. Observe the spelling in question and the exit button label.
+
+","-""Geld"" is displayed instead of ""held"".
+- Exit button displays ""Close"" instead of ""Done"".",All text should be correctly spelled and match the Figma design exactly,Open,Low,
+32,BD_031,"Missing Navigation Path from ""Extra Info"" Page to ""Bank Details"" or ""Home"" Page","The user is unable to navigate from the ""Extra Info"" page back to the ""Bank Details"" page because the Back button is not implemented. This disrupts the expected navigation flow, making it difficult for users to return and edit previously entered banking information.","1. Navigate to the ""Extra Info"" page after completing the ""Bank Details"" step.
+2. Attempt to go back to the ""Bank Details"" page using the Back button.
+3. Observe if the navigation works.","- No Back button is implemented.
+- User is unable to return to the ""Bank Details"" page from the ""Extra Info"" page.","User should be able to navigate back to the ""Bank Details"" page via a clearly visible and functional Back button.",Open,Medium,
+,,SIGNIN PAGE,,,,,,,
+,BD_032,Email Field Accepts Invalid Format Without Proper Validation Message,"The email input field allows submission of email addresses in invalid formats such as ""test@com"", and the user does not receive an appropriate error message. The feedback does not have a text, which makes it unclear that the issue is with the email format.","1. Open the sign-in form or any page with the email input field.
+2. Enter an invalid email format, such as ""test@com"".
+3. Click “Sign In” or submit the form.",The system accepts the input  and shows an error  that has no context and without specifying that the email format is invalid.,"The system should display a clear validation error, such as:“Please enter a valid email address.”",Open,Medium,
+,BD_033,GraphQL Error – “Cannot return null for non-nullable field Event.cinchAdditionalFee.” shown after sign in,"After a successful login, the user is redirected to the dashboard. However, a pop-up error appears with the message:
+
+""Cannot return null for non-nullable field Event.cinchAdditionalFee.""","1. Open the login page.
+2. Enter valid credentials.
+3. Click on ""Sign In.""
+4. Wait for the dashboard to load.","Dashboard loads, but a pop-up appears with the error: ""Cannot return null for non-nullable field Event.cinchAdditionalFee.""",Dashboard should load cleanly without errors or pop-ups.,Open,Medium,
+,,RESET PASSWORD PAGE,,,,,,,
+,BD_034,"Invalid Email Format Not Properly Validated on ""Send Reset Link"" Form","The email field on the “Forgot Password” or “Send Reset Link” form accepts invalid email formats (e.g., ""tester@com"") without displaying an appropriate validation message. Instead of notifying the user that the email format is incorrect, the system displays an error without text, which creates a poor user experience and confusion.
+
+","1. Navigate to the “Forgot Password” or ""Send Reset Link"" page.
+2. Enter an invalid email, such as ""tester@com"".
+3. Click “Send Reset Link.”
+
+","The system either silently fails or shows a generic error, failing to explain that the email format is incorrect.","The system should display a clear validation message like:
+“Please enter a valid email address.”",Open,Medium,
+,BD_035,,,,,,,,
+,BD_036,,,,,,,,
+,BD_037,,,,,,,,
+,BD_038,,,,,,,,
+,BD_039,,,,,,,,
+,BD_040,,,,,,,,
+,BD_041,,,,,,,,
+,BD_042,,,,,,,,
+,BD_043,,,,,,,,
+,BD_044,,,,,,,,
+,BD_045,,,,,,,,
+,BD_046,,,,,,,,
+,BD_047,,,,,,,,
+,BD_048,,,,,,,,
+,BD_049,,,,,,,,
+,BD_050,,,,,,,,
