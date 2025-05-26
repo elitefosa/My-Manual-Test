@@ -1,2 +1,2 @@
-# My-Manual-Test
-Here I document my journey and progress on test cases carried out
+Bridle is a horse is horse racing site, 
+Here I carry out exploratory testing, UI/UX testing working and collaborating with developers!
